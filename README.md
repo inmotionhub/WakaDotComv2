@@ -11,6 +11,33 @@ npm run dev
 
 Use `npm run lint` for static analysis and `npm run build` for a production build.
 
+## Deploy on Vercel
+
+This project is a **Vite + React SPA** with client-side routing (`react-router-dom`). `vercel.json` configures the Vite build and rewrites non-file routes to `index.html` so deep links (for example `/wakastores`, `/faqs`) work on refresh.
+
+### Git integration (recommended)
+
+1. Push the repository to GitHub, GitLab, or Bitbucket.
+2. In the [Vercel dashboard](https://vercel.com/new), import the repo.
+3. Confirm project settings (usually auto-detected from `vercel.json`):
+   - **Framework Preset:** Vite
+   - **Build Command:** `npm run build`
+   - **Output Directory:** `dist`
+   - **Install Command:** `npm ci`
+4. Deploy. No environment variables are required for the marketing site to build and run.
+
+Preview deployments are created for each push to non-production branches; production deploys follow your Git integration’s production branch (typically `main`).
+
+### CLI
+
+```bash
+npm i -g vercel
+vercel          # preview deployment
+vercel --prod   # production deployment
+```
+
+Node **20+** is required (see `engines` in `package.json` and `.nvmrc`).
+
 ## Reliability fixes completed
 
 - Fixed both testimonial sliders so every hook is called before the empty-testimonials return. Autoplay now uses a memoized callback and safely handles an empty or resized testimonials list.
